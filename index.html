@@ -3,273 +3,3653 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vplyv stresu na duševné zdravie študentov</title>
+<title>Vplyv stresu na duševné zdravie a imunitu študentov</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<!-- GOOGLE FONTS -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
 
 <style>
 
-/* ================= ROOT ================= */
+/* ================= ROOT VARIABLES ================= */
 
-:root {
-    --primary: #3b82f6;
-    --secondary: #22d3ee;
-    --accent: #8b5cf6;
-    --dark: #0f172a;
-    --light: #f8fafc;
+:root{
+    --primary:#2563eb;
+    --secondary:#38bdf8;
+    --accent:#8b5cf6;
+    --dark:#0f172a;
+    --light:#f8fafc;
+    --gray:#64748b;
+    --bg:#f1f5f9;
+    --glass:rgba(255,255,255,0.08);
 }
 
 /* ================= RESET ================= */
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-html {
-    scroll-behavior: smooth;
+html{
+    scroll-behavior:smooth;
+    scroll-padding-top:100px;
 }
 
-body {
-    font-family: 'Inter', sans-serif;
-    background: linear-gradient(180deg,#f8fafc,#eef2ff);
-    color: var(--dark);
-    line-height: 1.7;
+body{
+    font-family:'Inter',sans-serif;
+    background:linear-gradient(180deg,#f8fafc,#e2e8f0);
+    color:var(--dark);
+    line-height:1.75;
+    overflow-x:hidden;
 }
 
-/* ================= CONTAINER ================= */
+/* ================= GLOBAL CONTAINER ================= */
 
-.container {
-    max-width: 1200px;
-    margin: auto;
-    padding: 0 24px;
+.container{
+    max-width:1300px;
+    margin:0 auto;
+    padding:0 32px;
 }
 
-/* ================= HEADER ================= */
+/* ================= PREMIUM HEADER ================= */
 
-header {
-    position: fixed;
-    width: 100%;
-    background: rgba(15,23,42,0.9);
-    backdrop-filter: blur(12px);
-    padding: 20px 0;
-    z-index: 1000;
+header{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:80px;
+    display:flex;
+    align-items:center;
+    backdrop-filter:blur(14px);
+    background:rgba(15,23,42,0.75);
+    z-index:10000;
+    transition:all .4s ease;
 }
 
-.nav {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
+header.scrolled{
+    background:rgba(2,6,23,0.95);
+    box-shadow:0 10px 40px rgba(0,0,0,0.4);
 }
 
-.nav a {
-    color: #e2e8f0;
-    text-decoration: none;
-    font-weight: 600;
-    position: relative;
+.nav-wrapper{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    width:100%;
 }
 
-.nav a::after {
-    content: "";
-    position: absolute;
-    width: 0%;
-    height: 2px;
-    left: 0;
-    bottom: -6px;
-    background: var(--secondary);
-    transition: 0.3s;
+.logo{
+    font-weight:800;
+    font-size:18px;
+    letter-spacing:.5px;
+    color:#ffffff;
 }
 
-.nav a:hover::after {
-    width: 100%;
+.nav-links{
+    display:flex;
+    gap:36px;
+    list-style:none;
 }
 
-/* ================= HERO ================= */
-
-.hero {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    background: linear-gradient(135deg,#0f172a,#1e3a8a,#3b82f6);
-    color: white;
-    padding-top: 120px;
+.nav-links a{
+    color:#e2e8f0;
+    font-size:14px;
+    font-weight:500;
+    position:relative;
+    transition:color .3s ease;
 }
 
-.hero h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 56px;
-    line-height: 1.1;
-    margin-bottom: 24px;
+.nav-links a::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-6px;
+    width:0%;
+    height:2px;
+    background:var(--secondary);
+    transition:width .3s ease;
 }
 
-.hero p {
-    font-size: 20px;
-    margin-bottom: 40px;
+.nav-links a:hover{
+    color:#ffffff;
 }
 
-.btn {
-    padding: 14px 28px;
-    border-radius: 10px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: 0.3s;
+.nav-links a:hover::after{
+    width:100%;
 }
 
-.btn-primary {
-    background: linear-gradient(135deg,var(--primary),var(--secondary));
-    color: white;
+/* ================= HERO SECTION ================= */
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    padding-top:120px;
+    position:relative;
+    overflow:hidden;
+    background:linear-gradient(
+        135deg,
+        #0f172a 0%,
+        #1e3a8a 40%,
+        #2563eb 100%
+    );
 }
 
-.btn-primary:hover {
-    transform: translateY(-3px);
+.hero::before{
+    content:"";
+    position:absolute;
+    width:800px;
+    height:800px;
+    top:-200px;
+    right:-200px;
+    background:radial-gradient(circle,rgba(56,189,248,.35),transparent 70%);
+    filter:blur(60px);
+    animation:floatGlow 10s ease-in-out infinite;
 }
 
-/* ================= SECTION ================= */
-
-.section {
-    padding: 120px 0;
+@keyframes floatGlow{
+    0%{transform:translateY(0px);}
+    50%{transform:translateY(40px);}
+    100%{transform:translateY(0px);}
 }
 
-h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 42px;
-    margin-bottom: 40px;
+.hero-grid{
+    display:grid;
+    grid-template-columns:1.1fr .9fr;
+    gap:80px;
+    align-items:center;
 }
 
-/* ================= CARDS ================= */
-
-.grid {
-    display: grid;
-    gap: 40px;
-    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+.hero h1{
+    font-family:'Playfair Display',serif;
+    font-size:64px;
+    line-height:1.05;
+    color:#ffffff;
+    margin-bottom:28px;
+    letter-spacing:-1px;
 }
 
-.card {
-    background: white;
-    padding: 40px;
-    border-radius: 18px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.08);
-    transition: 0.4s;
+.hero p{
+    font-size:20px;
+    color:#e0f2fe;
+    margin-bottom:40px;
+    max-width:640px;
 }
 
-.card:hover {
-    transform: translateY(-10px);
+.btn{
+    padding:16px 34px;
+    border-radius:10px;
+    font-size:15px;
+    font-weight:600;
+    display:inline-block;
+    transition:all .3s ease;
 }
 
-/* ================= FOOTER ================= */
-
-footer {
-    background: #0f172a;
-    color: #cbd5e1;
-    padding: 80px 0;
-    text-align: center;
+.btn-primary{
+    background:linear-gradient(135deg,var(--primary),var(--secondary));
+    color:#ffffff;
 }
 
-footer p {
-    opacity: 0.7;
+.btn-primary:hover{
+    transform:translateY(-4px);
+    box-shadow:0 15px 40px rgba(37,99,235,.4);
 }
 
-/* ================= RESPONSIVE ================= */
+.btn-outline{
+    border:1px solid rgba(255,255,255,.6);
+    color:#ffffff;
+}
 
-@media(max-width:768px){
-    .hero h1 { font-size: 38px; }
+.btn-outline:hover{
+    background:rgba(255,255,255,.12);
+}
+
+/* HERO GLASS CARD */
+
+.glass-card{
+    background:var(--glass);
+    backdrop-filter:blur(16px);
+    padding:40px;
+    border-radius:22px;
+    border:1px solid rgba(255,255,255,.15);
+    color:#ffffff;
+    box-shadow:0 30px 80px rgba(0,0,0,.4);
+}
+
+.glass-card h3{
+    margin-bottom:20px;
+    font-size:20px;
+}
+
+.glass-card ul{
+    list-style:none;
+}
+
+.glass-card li{
+    margin-bottom:12px;
+    font-size:15px;
+    color:#dbeafe;
 }
 
 </style>
 </head>
-
 <body>
 
-<header>
-    <div class="container nav">
-        <a href="#stres">Stres</a>
-        <a href="#zdravie">Duševné zdravie</a>
-        <a href="#prevencia">Prevencia</a>
-    </div>
+<header id="header">
+<div class="container nav-wrapper">
+<div class="logo">STRESS & IMUNITA</div>
+<ul class="nav-links">
+<li><a href="#stres">Stres</a></li>
+<li><a href="#zdravie">Duševné zdravie</a></li>
+<li><a href="#biologia">Biológia</a></li>
+<li><a href="#prevencia">Prevencia</a></li>
+<li><a href="#zaver">Záver</a></li>
+</ul>
+</div>
 </header>
 
 <section class="hero">
-    <div class="container">
-        <h1>Vplyv stresu na duševné zdravie a imunitu študentov</h1>
-        <p>Dlhodobý stres oslabuje psychickú stabilitu aj obranyschopnosť organizmu.</p>
-        <a href="#stres" class="btn btn-primary">Preskúmať tému</a>
-    </div>
+<div class="container hero-grid">
+
+<div>
+<h1>
+Vplyv stresu<br>
+na duševné zdravie<br>
+a imunitu študentov
+</h1>
+
+<p>
+Komplexná, vedecky podložená analýza biologických,
+psychologických a behaviorálnych mechanizmov,
+ktoré formujú zdravie mladých ľudí v akademickom prostredí.
+</p>
+
+<a href="#stres" class="btn btn-primary">Preskúmať tému</a>
+<a href="#zdravie" class="btn btn-outline">Čítať viac</a>
+</div>
+
+<div class="glass-card">
+<h3>📊 Kľúčové fakty</h3>
+<ul>
+<li><strong>70 %</strong> študentov pociťuje chronický stres</li>
+<li><strong>Kortizol</strong> oslabuje imunitnú odpoveď</li>
+<li><strong>Nedostatok spánku</strong> zvyšuje úzkosť</li>
+<li><strong>Pohyb</strong> znižuje hladinu stresových hormónov</li>
+</ul>
+</div>
+
+</div>
 </section>
 
-<section class="section" id="stres">
-    <div class="container">
-        <h2>Hlavné zdroje stresu</h2>
-        <div class="grid">
-            <div class="card">
-                <h3>Akademický tlak</h3>
-                <p>Neustále skúšky, termíny a očakávania vedú k chronickému stresu.</p>
-            </div>
-            <div class="card">
-                <h3>Nedostatok času</h3>
-                <p>Kombinácia školy, brigády a osobného života vyvoláva vyčerpanie.</p>
-            </div>
-            <div class="card">
-                <h3>Nedostatok spánku</h3>
-                <p>Zvyšuje hladinu kortizolu a oslabuje imunitný systém.</p>
-            </div>
-        </div>
-    </div>
+
+
+<!-- ================= SECTION: STRES ================= -->
+
+<style>
+
+/* ================= GENERIC SECTION STYLE ================= */
+
+.section{
+    padding:140px 0;
+    position:relative;
+}
+
+.section-dark{
+    background:#0b1220;
+    color:#f1f5f9;
+}
+
+.section-light{
+    background:#ffffff;
+}
+
+.section-header{
+    max-width:800px;
+    margin-bottom:80px;
+}
+
+.section-header h2{
+    font-family:'Playfair Display',serif;
+    font-size:48px;
+    margin-bottom:24px;
+    line-height:1.2;
+}
+
+.section-header p{
+    font-size:18px;
+    color:var(--gray);
+}
+
+/* DARK MODE TEXT FIX */
+.section-dark .section-header p{
+    color:#cbd5e1;
+}
+
+/* ================= STRESS GRID ================= */
+
+.stress-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:40px;
+}
+
+.stress-card{
+    background:#ffffff;
+    padding:40px 34px;
+    border-radius:18px;
+    box-shadow:0 20px 60px rgba(15,23,42,.08);
+    transition:all .35s ease;
+    position:relative;
+    overflow:hidden;
+}
+
+.stress-card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+        135deg,
+        rgba(37,99,235,.06),
+        transparent
+    );
+}
+
+.stress-card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 30px 80px rgba(15,23,42,.15);
+}
+
+.stress-card h3{
+    font-size:22px;
+    margin-bottom:16px;
+}
+
+.stress-card p{
+    font-size:15px;
+    color:var(--gray);
+    line-height:1.7;
+}
+
+.stress-icon{
+    width:60px;
+    height:60px;
+    border-radius:16px;
+    background:linear-gradient(135deg,var(--primary),var(--secondary));
+    color:#ffffff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:26px;
+    margin-bottom:24px;
+}
+
+</style>
+
+<section class="section section-light" id="stres">
+<div class="container">
+
+<div class="section-header">
+<h2>Stres ako biologický a psychologický fenomén</h2>
+<p>
+Stres je komplexná odpoveď organizmu na záťažové podnety,
+ktoré narúšajú vnútornú rovnováhu (homeostázu).
+Krátkodobo má adaptačný význam, no chronická aktivácia
+stresovej reakcie môže viesť k vážnym zdravotným dôsledkom.
+</p>
+</div>
+
+<div class="stress-grid">
+
+<div class="stress-card">
+<div class="stress-icon">📚</div>
+<h3>Akademický tlak</h3>
+<p>
+Neustále hodnotenie výkonu, skúšky, testy a očakávania
+vytvárajú dlhodobé napätie. Aktivácia HPA osi vedie
+k zvýšenej produkcii kortizolu, čo pri chronickom
+pôsobení oslabuje imunitnú odpoveď organizmu.
+</p>
+</div>
+
+<div class="stress-card">
+<div class="stress-icon">⏰</div>
+<h3>Nedostatok času</h3>
+<p>
+Časová tieseň aktivuje sympatický nervový systém.
+Dlhodobý pocit nestíhania udržuje organizmus
+v stave pohotovosti, čo narúša regeneráciu,
+spánok a kognitívne procesy.
+</p>
+</div>
+
+<div class="stress-card">
+<div class="stress-icon">😴</div>
+<h3>Nedostatok spánku</h3>
+<p>
+Spánková deprivácia zvyšuje hladinu stresových hormónov,
+zhoršuje neuroplasticitu a znižuje aktivitu
+prirodzených zabíjačských buniek (NK buniek),
+čo priamo oslabuje imunitu.
+</p>
+</div>
+
+<div class="stress-card">
+<div class="stress-icon">🧠</div>
+<h3>Psychická záťaž</h3>
+<p>
+Porovnávanie sa, neistota budúcnosti a sociálny tlak
+ovplyvňujú limbický systém a reguláciu emócií.
+Dlhodobé preťaženie zvyšuje riziko úzkosti a depresie.
+</p>
+</div>
+
+</div>
+
+</div>
 </section>
 
-<section class="section" id="zdravie">
-    <div class="container">
-        <h2>Biologické dôsledky stresu</h2>
-        <div class="grid">
-            <div class="card">
-                <h3>Kortizol</h3>
-                <p>Dlhodobo zvýšený hormón stresu oslabuje imunitu a zhoršuje koncentráciu.</p>
-            </div>
-            <div class="card">
-                <h3>Imunita</h3>
-                <p>Chronický stres znižuje počet obranných buniek v tele.</p>
-            </div>
-        </div>
-    </div>
+
+<!-- ================= SECTION: NEUROBIOLÓGIA ================= -->
+
+<style>
+
+/* ================= NEURO SECTION ================= */
+
+.neuro-section{
+    padding:160px 0;
+    background:linear-gradient(
+        180deg,
+        #0f172a 0%,
+        #111827 100%
+    );
+    color:#f1f5f9;
+    position:relative;
+    overflow:hidden;
+}
+
+.neuro-section::before{
+    content:"";
+    position:absolute;
+    width:900px;
+    height:900px;
+    left:-300px;
+    top:-200px;
+    background:radial-gradient(circle,rgba(139,92,246,.25),transparent 70%);
+    filter:blur(80px);
+}
+
+.neuro-grid{
+    display:grid;
+    grid-template-columns:1.1fr .9fr;
+    gap:100px;
+    align-items:center;
+}
+
+.neuro-content h2{
+    font-family:'Playfair Display',serif;
+    font-size:50px;
+    margin-bottom:30px;
+}
+
+.neuro-content p{
+    font-size:18px;
+    color:#cbd5e1;
+    margin-bottom:22px;
+    line-height:1.8;
+}
+
+.neuro-cards{
+    display:grid;
+    gap:30px;
+}
+
+.neuro-card{
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(18px);
+    padding:30px;
+    border-radius:18px;
+    border:1px solid rgba(255,255,255,0.08);
+    transition:all .35s ease;
+}
+
+.neuro-card:hover{
+    transform:translateY(-8px);
+    background:rgba(255,255,255,0.08);
+}
+
+.neuro-card h3{
+    font-size:20px;
+    margin-bottom:12px;
+    color:#ffffff;
+}
+
+.neuro-card p{
+    font-size:15px;
+    color:#cbd5e1;
+}
+
+@media(max-width:1000px){
+    .neuro-grid{
+        grid-template-columns:1fr;
+        gap:60px;
+    }
+}
+
+</style>
+
+<section class="neuro-section" id="biologia">
+<div class="container neuro-grid">
+
+<div class="neuro-content">
+<h2>Neurobiológia stresovej odpovede</h2>
+
+<p>
+Stresová reakcia organizmu je riadená komplexnou
+interakciou medzi centrálnym nervovým systémom,
+endokrinným systémom a autonómnym nervovým systémom.
+Kľúčovú úlohu zohráva hypotalamo-hypofýzo-adrenálna os (HPA os).
+</p>
+
+<p>
+Aktivácia HPA osi vedie k vyplaveniu kortizolu,
+ktorý moduluje metabolizmus glukózy, imunitnú odpoveď
+a neuroplasticitu. Chronická hyperaktivácia tejto osi
+môže viesť k dysregulácii serotonínu a dopamínu,
+čo zvyšuje riziko úzkostných a depresívnych porúch.
+</p>
+
+<p>
+Dlhodobý stres ovplyvňuje aj štruktúry ako hipokampus,
+amygdala a prefrontálna kôra. Dochádza k zmenám
+v synaptickej plasticite, čo má dopad na pamäť,
+emocionálnu reguláciu a rozhodovanie.
+</p>
+</div>
+
+<div class="neuro-cards">
+
+<div class="neuro-card">
+<h3>HPA os</h3>
+<p>
+Hypotalamus uvoľňuje CRH, hypofýza ACTH
+a nadobličky kortizol. Tento mechanizmus je
+základnou biologickou odpoveďou na stres.
+</p>
+</div>
+
+<div class="neuro-card">
+<h3>Amygdala</h3>
+<p>
+Zodpovedná za spracovanie strachu a hrozieb.
+Pri chronickom strese sa jej aktivita zvyšuje,
+čo môže viesť k prehnanej úzkostnej reakcii.
+</p>
+</div>
+
+<div class="neuro-card">
+<h3>Hipokampus</h3>
+<p>
+Dôležitý pre pamäť a učenie. Chronický stres
+môže znižovať jeho objem a narúšať
+kognitívne funkcie študentov.
+</p>
+</div>
+
+<div class="neuro-card">
+<h3>Prefrontálna kôra</h3>
+<p>
+Reguluje rozhodovanie a kontrolu impulzov.
+Pri dlhodobom strese dochádza k jej oslabeniu,
+čo znižuje schopnosť racionálneho hodnotenia situácií.
+</p>
+</div>
+
+</div>
+
+</div>
 </section>
 
-<section class="section" id="prevencia">
-    <div class="container">
-        <h2>Prevencia</h2>
-        <div class="grid">
-            <div class="card">
-                <h3>Spánok</h3>
-                <p>7–9 hodín kvalitného spánku denne podporuje regeneráciu mozgu.</p>
-            </div>
-            <div class="card">
-                <h3>Pohyb</h3>
-                <p>Pravidelná fyzická aktivita znižuje hladinu stresových hormónov.</p>
-            </div>
-            <div class="card">
-                <h3>Organizácia času</h3>
-                <p>Plánovanie znižuje pocit chaosu a preťaženia.</p>
-            </div>
-        </div>
-    </div>
+
+
+<!-- ================= SECTION: IMUNITA ================= -->
+
+<style>
+
+/* ================= IMMUNITY SECTION ================= */
+
+.immunity-section{
+    padding:160px 0;
+    background:linear-gradient(180deg,#ffffff 0%,#f1f5f9 100%);
+    position:relative;
+}
+
+.immunity-header{
+    max-width:850px;
+    margin-bottom:90px;
+}
+
+.immunity-header h2{
+    font-family:'Playfair Display',serif;
+    font-size:50px;
+    margin-bottom:24px;
+}
+
+.immunity-header p{
+    font-size:18px;
+    color:var(--gray);
+    line-height:1.8;
+}
+
+.immunity-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:50px;
+}
+
+.immunity-card{
+    background:#ffffff;
+    padding:50px 40px;
+    border-radius:22px;
+    box-shadow:0 30px 90px rgba(15,23,42,.08);
+    transition:all .4s ease;
+    position:relative;
+    overflow:hidden;
+}
+
+.immunity-card::before{
+    content:"";
+    position:absolute;
+    top:-80px;
+    right:-80px;
+    width:200px;
+    height:200px;
+    background:radial-gradient(circle,rgba(56,189,248,.2),transparent 70%);
+}
+
+.immunity-card:hover{
+    transform:translateY(-12px);
+    box-shadow:0 40px 120px rgba(15,23,42,.15);
+}
+
+.immunity-icon{
+    font-size:34px;
+    margin-bottom:24px;
+    color:var(--primary);
+}
+
+.immunity-card h3{
+    font-size:22px;
+    margin-bottom:18px;
+}
+
+.immunity-card p{
+    font-size:15px;
+    color:var(--gray);
+    line-height:1.75;
+}
+
+/* INFO STRIP */
+
+.info-strip{
+    margin-top:100px;
+    padding:60px 80px;
+    background:linear-gradient(135deg,var(--primary),var(--accent));
+    border-radius:30px;
+    color:#ffffff;
+    text-align:center;
+}
+
+.info-strip h3{
+    font-size:28px;
+    margin-bottom:20px;
+}
+
+.info-strip p{
+    font-size:18px;
+    opacity:.95;
+}
+
+@media(max-width:900px){
+    .info-strip{
+        padding:40px;
+    }
+}
+
+</style>
+
+<section class="immunity-section">
+<div class="container">
+
+<div class="immunity-header">
+<h2>Vplyv stresu na imunitný systém</h2>
+<p>
+Imunitný systém predstavuje komplexnú sieť buniek, tkanív a signálnych molekúl,
+ktoré chránia organizmus pred patogénmi. Chronický stres však túto rovnováhu
+významne narúša a vedie k oslabeniu obranyschopnosti organizmu.
+</p>
+</div>
+
+<div class="immunity-grid">
+
+<div class="immunity-card">
+<div class="immunity-icon">🧬</div>
+<h3>Kortizol a potlačenie imunity</h3>
+<p>
+Dlhodobé zvýšenie hladiny kortizolu potláča proliferáciu lymfocytov,
+znižuje aktivitu prirodzených zabíjačských buniek a narúša zápalovú odpoveď.
+Výsledkom je zvýšená náchylnosť na vírusové a bakteriálne infekcie.
+</p>
+</div>
+
+<div class="immunity-card">
+<div class="immunity-icon">🔥</div>
+<h3>Nízkoúrovňový zápal</h3>
+<p>
+Chronický stres môže paradoxne podporovať dlhodobý,
+nízkoúrovňový zápal. Tento stav je spájaný s vyšším rizikom
+depresie, únavového syndrómu a metabolických ochorení.
+</p>
+</div>
+
+<div class="immunity-card">
+<div class="immunity-icon">⚡</div>
+<h3>Energetická dysregulácia</h3>
+<p>
+Stres zvyšuje potrebu glukózy a narúša metabolickú stabilitu.
+Organizmus ostáva v stave pohotovosti,
+čo oslabuje schopnosť regenerácie a obnovy buniek.
+</p>
+</div>
+
+<div class="immunity-card">
+<div class="immunity-icon">🛡</div>
+<h3>Znížená odolnosť voči infekciám</h3>
+<p>
+Štúdie ukazujú, že študenti vystavení dlhodobému stresu
+majú vyššiu pravdepodobnosť ochorenia počas skúškového obdobia,
+najmä respiračnými infekciami.
+</p>
+</div>
+
+</div>
+
+<div class="info-strip">
+<h3>Biologický fakt</h3>
+<p>
+Krátkodobý stres môže imunitu dočasne stimulovať,
+no chronická aktivácia stresovej osi vedie k jej postupnému oslabeniu.
+Rovnováha medzi záťažou a regeneráciou je kľúčová.
+</p>
+</div>
+
+</div>
 </section>
 
-<footer>
-    <div class="container">
-        <p>© 2025 Projekt o duševnom zdraví študentov</p>
-    </div>
-</footer>
+
+<!-- ================= SECTION: DUŠEVNÉ ZDRAVIE ================= -->
+
+<style>
+
+/* ================= MENTAL HEALTH SECTION ================= */
+
+.mental-section{
+    padding:160px 0;
+    background:#0b1220;
+    color:#f1f5f9;
+    position:relative;
+    overflow:hidden;
+}
+
+.mental-section::before{
+    content:"";
+    position:absolute;
+    width:800px;
+    height:800px;
+    right:-300px;
+    bottom:-200px;
+    background:radial-gradient(circle,rgba(37,99,235,.25),transparent 70%);
+    filter:blur(80px);
+}
+
+.mental-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:100px;
+    align-items:flex-start;
+}
+
+.mental-text h2{
+    font-family:'Playfair Display',serif;
+    font-size:50px;
+    margin-bottom:28px;
+}
+
+.mental-text p{
+    font-size:18px;
+    color:#cbd5e1;
+    margin-bottom:24px;
+    line-height:1.85;
+}
+
+.mental-cards{
+    display:grid;
+    gap:30px;
+}
+
+.mental-card{
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(20px);
+    padding:35px;
+    border-radius:20px;
+    border:1px solid rgba(255,255,255,0.08);
+    transition:all .35s ease;
+}
+
+.mental-card:hover{
+    transform:translateY(-10px);
+    background:rgba(255,255,255,0.08);
+}
+
+.mental-card h3{
+    font-size:20px;
+    margin-bottom:14px;
+    color:#ffffff;
+}
+
+.mental-card p{
+    font-size:15px;
+    color:#cbd5e1;
+    line-height:1.75;
+}
+
+@media(max-width:1000px){
+    .mental-grid{
+        grid-template-columns:1fr;
+        gap:60px;
+    }
+}
+
+</style>
+
+<section class="mental-section" id="zdravie">
+<div class="container mental-grid">
+
+<div class="mental-text">
+<h2>Psychické dôsledky chronického stresu</h2>
+
+<p>
+Chronický stres zásadne ovplyvňuje duševné zdravie študentov.
+Dlhodobá aktivácia stresovej osi vedie k zmenám v regulácii
+neurotransmiterov, čo môže spôsobiť poruchy nálady,
+úzkostné symptómy a zníženú schopnosť zvládať záťaž.
+</p>
+
+<p>
+Narušená rovnováha medzi limbickým systémom
+a prefrontálnou kôrou znižuje emocionálnu stabilitu.
+Výsledkom môže byť podráždenosť, emočné výkyvy,
+vyčerpanie a strata motivácie.
+</p>
+
+<p>
+U študentov sa tieto zmeny často prejavujú
+zhoršenou koncentráciou, poklesom akademického výkonu
+a sociálnou izoláciou.
+</p>
+</div>
+
+<div class="mental-cards">
+
+<div class="mental-card">
+<h3>Úzkosť</h3>
+<p>
+Pretrvávajúca aktivácia amygdaly zvyšuje pocit ohrozenia.
+Študent môže pociťovať napätie, nepokoj
+a nadmerné obavy aj v bežných situáciách.
+</p>
+</div>
+
+<div class="mental-card">
+<h3>Depresívne symptómy</h3>
+<p>
+Dlhodobý stres ovplyvňuje hladiny serotonínu
+a dopamínu, čo môže viesť k strate záujmu,
+poklesu energie a pocitom beznádeje.
+</p>
+</div>
+
+<div class="mental-card">
+<h3>Syndróm vyhorenia</h3>
+<p>
+Vyhorenie je stav emocionálneho, fyzického
+a mentálneho vyčerpania. Vzniká pri
+dlhodobej záťaži bez adekvátnej regenerácie.
+</p>
+</div>
+
+<div class="mental-card">
+<h3>Kognitívne oslabenie</h3>
+<p>
+Chronický stres narúša pamäťové procesy
+a schopnosť sústredenia, čo výrazne
+ovplyvňuje akademický výkon.
+</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- ================= SECTION: SPÁNOK A REGENERÁCIA ================= -->
+
+<style>
+
+/* ================= SLEEP SECTION ================= */
+
+.sleep-section{
+    padding:170px 0;
+    background:linear-gradient(180deg,#f8fafc 0%,#e2e8f0 100%);
+    position:relative;
+}
+
+.sleep-header{
+    max-width:850px;
+    margin-bottom:90px;
+}
+
+.sleep-header h2{
+    font-family:'Playfair Display',serif;
+    font-size:52px;
+    margin-bottom:24px;
+}
+
+.sleep-header p{
+    font-size:18px;
+    color:var(--gray);
+    line-height:1.8;
+}
+
+/* TIMELINE STYLE */
+
+.sleep-timeline{
+    position:relative;
+    margin-top:80px;
+    padding-left:60px;
+    border-left:4px solid var(--primary);
+}
+
+.sleep-item{
+    margin-bottom:70px;
+    position:relative;
+}
+
+.sleep-item:last-child{
+    margin-bottom:0;
+}
+
+.sleep-dot{
+    position:absolute;
+    left:-34px;
+    top:8px;
+    width:20px;
+    height:20px;
+    border-radius:50%;
+    background:linear-gradient(135deg,var(--primary),var(--secondary));
+    box-shadow:0 0 0 6px rgba(37,99,235,.15);
+}
+
+.sleep-item h3{
+    font-size:22px;
+    margin-bottom:14px;
+}
+
+.sleep-item p{
+    font-size:16px;
+    color:var(--gray);
+    line-height:1.75;
+}
+
+/* REGENERATION CARDS */
+
+.regeneration-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:40px;
+    margin-top:120px;
+}
+
+.regeneration-box{
+    background:#ffffff;
+    padding:45px 35px;
+    border-radius:22px;
+    box-shadow:0 25px 80px rgba(15,23,42,.08);
+    transition:all .35s ease;
+}
+
+.regeneration-box:hover{
+    transform:translateY(-10px);
+    box-shadow:0 35px 100px rgba(15,23,42,.15);
+}
+
+.regeneration-box h4{
+    font-size:20px;
+    margin-bottom:16px;
+}
+
+.regeneration-box p{
+    font-size:15px;
+    color:var(--gray);
+    line-height:1.7;
+}
+
+@media(max-width:900px){
+    .sleep-timeline{
+        padding-left:40px;
+    }
+}
+
+</style>
+
+<section class="sleep-section">
+<div class="container">
+
+<div class="sleep-header">
+<h2>Spánok ako biologický základ regenerácie</h2>
+<p>
+Spánok predstavuje kľúčový mechanizmus obnovy nervového
+a imunitného systému. Nedostatok spánku narúša hormonálnu rovnováhu,
+zvyšuje hladinu kortizolu a oslabuje schopnosť organizmu
+reagovať na infekcie.
+</p>
+</div>
+
+<div class="sleep-timeline">
+
+<div class="sleep-item">
+<div class="sleep-dot"></div>
+<h3>Fáza zaspávania</h3>
+<p>
+Postupné znižovanie aktivity sympatického systému.
+Ak je organizmus vystavený chronickému stresu,
+prechod do spánku je narušený a dochádza k nespavosti.
+</p>
+</div>
+
+<div class="sleep-item">
+<div class="sleep-dot"></div>
+<h3>Hlboký spánok (NREM)</h3>
+<p>
+Dochádza k regenerácii tkanív, uvoľňovaniu rastového hormónu
+a podpore imunitnej odpovede. Nedostatok tejto fázy
+znižuje odolnosť organizmu.
+</p>
+</div>
+
+<div class="sleep-item">
+<div class="sleep-dot"></div>
+<h3>REM fáza</h3>
+<p>
+Podporuje konsolidáciu pamäte a emocionálnu stabilitu.
+Chronický stres môže REM fázu skracovať,
+čo zhoršuje spracovanie emócií.
+</p>
+</div>
+
+</div>
+
+<div class="regeneration-grid">
+
+<div class="regeneration-box">
+<h4>Hormonálna rovnováha</h4>
+<p>
+Kvalitný spánok stabilizuje hladiny kortizolu
+a melatonínu, čím podporuje cirkadiánny rytmus
+a regeneráciu organizmu.
+</p>
+</div>
+
+<div class="regeneration-box">
+<h4>Obnova imunity</h4>
+<p>
+Počas spánku dochádza k aktivácii T-lymfocytov
+a zvýšenej produkcii cytokínov, ktoré sú
+kľúčové pre obranyschopnosť.
+</p>
+</div>
+
+<div class="regeneration-box">
+<h4>Kognitívna stabilita</h4>
+<p>
+Dostatok spánku zlepšuje koncentráciu,
+pamäť a schopnosť rozhodovania,
+čo je pre študentov zásadné.
+</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- ================= SECTION: ŽIVOTNÝ ŠTÝL ================= -->
+
+<style>
+
+/* ================= LIFESTYLE SECTION ================= */
+
+.lifestyle-section{
+    padding:170px 0;
+    background:#ffffff;
+    position:relative;
+}
+
+.lifestyle-grid{
+    display:grid;
+    grid-template-columns:1.1fr .9fr;
+    gap:100px;
+    align-items:center;
+}
+
+.lifestyle-text h2{
+    font-family:'Playfair Display',serif;
+    font-size:52px;
+    margin-bottom:28px;
+}
+
+.lifestyle-text p{
+    font-size:18px;
+    color:var(--gray);
+    margin-bottom:24px;
+    line-height:1.85;
+}
+
+/* BENEFITS LIST */
+
+.benefits{
+    margin-top:40px;
+    display:grid;
+    gap:18px;
+}
+
+.benefit-item{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    padding:18px 22px;
+    border-radius:16px;
+    background:linear-gradient(
+        135deg,
+        rgba(37,99,235,.08),
+        rgba(56,189,248,.08)
+    );
+    font-weight:500;
+}
+
+.benefit-icon{
+    width:34px;
+    height:34px;
+    border-radius:50%;
+    background:var(--primary);
+    color:#ffffff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:14px;
+}
+
+/* INFOGRAPHIC CARD */
+
+.nutrition-card{
+    background:linear-gradient(135deg,var(--primary),var(--accent));
+    padding:50px 40px;
+    border-radius:30px;
+    color:#ffffff;
+    box-shadow:0 40px 120px rgba(37,99,235,.3);
+}
+
+.nutrition-card h3{
+    font-size:26px;
+    margin-bottom:24px;
+}
+
+.nutrition-list{
+    list-style:none;
+}
+
+.nutrition-list li{
+    margin-bottom:16px;
+    font-size:16px;
+    line-height:1.7;
+    opacity:.95;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1000px){
+    .lifestyle-grid{
+        grid-template-columns:1fr;
+        gap:60px;
+    }
+}
+
+</style>
+
+<section class="lifestyle-section" id="zivotny-styl">
+<div class="container lifestyle-grid">
+
+<div class="lifestyle-text">
+<h2>Životný štýl ako ochranný faktor</h2>
+
+<p>
+Životný štýl významne ovplyvňuje schopnosť organizmu zvládať stres.
+Vyvážená strava, pravidelný pohyb a stabilný denný režim
+pomáhajú regulovať hladiny stresových hormónov
+a podporujú duševnú rovnováhu.
+</p>
+
+<p>
+Nesprávne stravovacie návyky, nadmerná konzumácia kofeínu,
+vynechávanie jedál či nepravidelný režim
+zvyšujú fyziologickú záťaž organizmu
+a zhoršujú adaptačnú schopnosť.
+</p>
+
+<div class="benefits">
+<div class="benefit-item">
+<div class="benefit-icon">✓</div>
+Stabilnejšia hladina energie počas dňa
+</div>
+
+<div class="benefit-item">
+<div class="benefit-icon">✓</div>
+Lepšia koncentrácia a pamäť
+</div>
+
+<div class="benefit-item">
+<div class="benefit-icon">✓</div>
+Podpora imunitného systému
+</div>
+
+<div class="benefit-item">
+<div class="benefit-icon">✓</div>
+Zníženie únavy a emočnej nestability
+</div>
+</div>
+
+</div>
+
+<div class="nutrition-card">
+<h3>Nutričné odporúčania pre študentov</h3>
+
+<ul class="nutrition-list">
+<li><strong>Komplexné sacharidy</strong> – stabilizujú hladinu glukózy a energiu.</li>
+<li><strong>Bielkoviny</strong> – podporujú tvorbu neurotransmiterov.</li>
+<li><strong>Omega-3 mastné kyseliny</strong> – znižujú zápalové procesy.</li>
+<li><strong>Vitamíny skupiny B</strong> – podporujú nervový systém.</li>
+<li><strong>Dostatočná hydratácia</strong> – nevyhnutná pre kognitívny výkon.</li>
+</ul>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- ================= SECTION: POHYB ================= -->
+
+<style>
+
+/* ================= MOVEMENT SECTION ================= */
+
+.movement-section{
+    padding:180px 0;
+    background:linear-gradient(180deg,#0f172a 0%,#1e293b 100%);
+    color:#f1f5f9;
+    position:relative;
+    overflow:hidden;
+}
+
+.movement-section::before{
+    content:"";
+    position:absolute;
+    width:900px;
+    height:900px;
+    left:-300px;
+    bottom:-300px;
+    background:radial-gradient(circle,rgba(56,189,248,.25),transparent 70%);
+    filter:blur(80px);
+}
+
+.movement-header{
+    max-width:900px;
+    margin-bottom:100px;
+}
+
+.movement-header h2{
+    font-family:'Playfair Display',serif;
+    font-size:54px;
+    margin-bottom:28px;
+}
+
+.movement-header p{
+    font-size:18px;
+    color:#cbd5e1;
+    line-height:1.85;
+}
+
+/* TRAINING GRID */
+
+.training-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:40px;
+}
+
+.training-card{
+    background:rgba(255,255,255,.06);
+    backdrop-filter:blur(20px);
+    padding:40px 30px;
+    border-radius:22px;
+    border:1px solid rgba(255,255,255,.08);
+    transition:all .35s ease;
+}
+
+.training-card:hover{
+    transform:translateY(-10px);
+    background:rgba(255,255,255,.1);
+}
+
+.training-card h3{
+    font-size:20px;
+    margin-bottom:18px;
+    color:#ffffff;
+}
+
+.training-card ul{
+    list-style:none;
+    padding:0;
+}
+
+.training-card li{
+    margin-bottom:12px;
+    font-size:15px;
+    color:#cbd5e1;
+    line-height:1.6;
+}
+
+/* QUOTE STRIP */
+
+.movement-quote{
+    margin-top:120px;
+    padding:70px 80px;
+    background:linear-gradient(135deg,var(--primary),var(--secondary));
+    border-radius:32px;
+    text-align:center;
+    box-shadow:0 40px 120px rgba(37,99,235,.4);
+}
+
+.movement-quote h3{
+    font-size:30px;
+    margin-bottom:18px;
+    color:#ffffff;
+}
+
+.movement-quote p{
+    font-size:18px;
+    color:#ffffff;
+    opacity:.95;
+}
+
+@media(max-width:900px){
+    .movement-quote{
+        padding:50px 40px;
+    }
+}
+
+</style>
+
+<section class="movement-section" id="pohyb">
+<div class="container">
+
+<div class="movement-header">
+<h2>Pohyb ako prirodzený regulátor stresu</h2>
+<p>
+Fyzická aktivita patrí medzi najúčinnejšie nástroje
+na znižovanie stresu. Zvyšuje produkciu endorfínov,
+zlepšuje reguláciu kortizolu a podporuje
+kardiovaskulárne aj imunitné zdravie.
+</p>
+</div>
+
+<div class="training-grid">
+
+<div class="training-card">
+<h3>Pondelok – Aktivácia</h3>
+<ul>
+<li>30 minút svižná chôdza</li>
+<li>Mobilizačné cvičenia</li>
+<li>Krátke dychové techniky</li>
+</ul>
+</div>
+
+<div class="training-card">
+<h3>Utorok – Silový tréning</h3>
+<ul>
+<li>Cvičenie s vlastnou váhou</li>
+<li>Drepy, kliky, plank</li>
+<li>20–30 minút intenzity</li>
+</ul>
+</div>
+
+<div class="training-card">
+<h3>Streda – Regenerácia</h3>
+<ul>
+<li>Jóga alebo pilates</li>
+<li>Strečing celého tela</li>
+<li>Zníženie svalového napätia</li>
+</ul>
+</div>
+
+<div class="training-card">
+<h3>Štvrtok – Kardio</h3>
+<ul>
+<li>Beh alebo bicykel</li>
+<li>20–40 min miernej záťaže</li>
+<li>Podpora imunity</li>
+</ul>
+</div>
+
+<div class="training-card">
+<h3>Piatok – Funkčný tréning</h3>
+<ul>
+<li>Kombinácia sily a stability</li>
+<li>Core cvičenia</li>
+<li>Krátky, efektívny blok</li>
+</ul>
+</div>
+
+<div class="training-card">
+<h3>Víkend – Voľný pohyb</h3>
+<ul>
+<li>Pobyt v prírode</li>
+<li>Šport s priateľmi</li>
+<li>Radosť bez tlaku na výkon</li>
+</ul>
+</div>
+
+</div>
+
+<div class="movement-quote">
+<h3>Biologická realita</h3>
+<p>
+Aj 20–30 minút pravidelného pohybu denne
+dokáže významne znížiť hladinu stresových hormónov
+a zlepšiť psychickú stabilitu študentov.
+</p>
+</div>
+
+</div>
+</section>
+
+
+<!-- ================= SECTION: TIME MANAGEMENT ================= -->
+
+<style>
+
+/* ================= TIME MANAGEMENT SECTION ================= */
+
+.tm-section{
+    padding:180px 0;
+    background:linear-gradient(180deg,#ffffff 0%,#f1f5f9 100%);
+}
+
+.tm-header{
+    max-width:900px;
+    margin-bottom:100px;
+}
+
+.tm-header h2{
+    font-family:'Playfair Display',serif;
+    font-size:54px;
+    margin-bottom:28px;
+}
+
+.tm-header p{
+    font-size:18px;
+    color:var(--gray);
+    line-height:1.85;
+}
+
+/* STRATEGY GRID */
+
+.tm-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:45px;
+}
+
+.tm-card{
+    background:#ffffff;
+    padding:45px 35px;
+    border-radius:24px;
+    box-shadow:0 30px 90px rgba(15,23,42,.08);
+    transition:all .35s ease;
+    position:relative;
+    overflow:hidden;
+}
+
+.tm-card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+        135deg,
+        rgba(37,99,235,.05),
+        transparent
+    );
+}
+
+.tm-card:hover{
+    transform:translateY(-12px);
+    box-shadow:0 40px 120px rgba(15,23,42,.15);
+}
+
+.tm-icon{
+    font-size:28px;
+    margin-bottom:22px;
+    color:var(--primary);
+}
+
+.tm-card h3{
+    font-size:22px;
+    margin-bottom:16px;
+}
+
+.tm-card p{
+    font-size:15px;
+    color:var(--gray);
+    line-height:1.75;
+}
+
+/* PROCESS STRIP */
+
+.tm-process{
+    margin-top:120px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+}
+
+.tm-step{
+    background:linear-gradient(135deg,var(--primary),var(--secondary));
+    padding:40px 30px;
+    border-radius:20px;
+    color:#ffffff;
+    text-align:center;
+}
+
+.tm-step h4{
+    font-size:20px;
+    margin-bottom:12px;
+}
+
+.tm-step p{
+    font-size:14px;
+    opacity:.95;
+}
+
+@media(max-width:1000px){
+    .tm-process{
+        grid-template-columns:1fr 1fr;
+    }
+}
+
+@media(max-width:600px){
+    .tm-process{
+        grid-template-columns:1fr;
+    }
+}
+
+</style>
+
+<section class="tm-section" id="prevencia">
+<div class="container">
+
+<div class="tm-header">
+<h2>Time management ako nástroj prevencie stresu</h2>
+<p>
+Jednou z najčastejších príčin stresu u študentov
+je nesprávna organizácia času. Hromadenie povinností,
+prokrastinácia a nepravidelný režim vedú
+k pocitu zahltenia a strate kontroly.
+</p>
+</div>
+
+<div class="tm-grid">
+
+<div class="tm-card">
+<div class="tm-icon">📅</div>
+<h3>Plánovanie</h3>
+<p>
+Vytváranie realistických denných a týždenných plánov
+pomáha rozdeliť veľké úlohy na menšie kroky
+a znižuje mentálnu záťaž.
+</p>
+</div>
+
+<div class="tm-card">
+<div class="tm-icon">🎯</div>
+<h3>Stanovenie priorít</h3>
+<p>
+Identifikácia najdôležitejších úloh umožňuje
+efektívne využitie energie
+a minimalizuje zbytočný stres.
+</p>
+</div>
+
+<div class="tm-card">
+<div class="tm-icon">⏳</div>
+<h3>Technika Pomodoro</h3>
+<p>
+Striedanie 25-minútových blokov práce
+s krátkymi prestávkami podporuje
+sústredenie a zabraňuje vyčerpaniu.
+</p>
+</div>
+
+<div class="tm-card">
+<div class="tm-icon">🧘</div>
+<h3>Zaradenie oddychu</h3>
+<p>
+Oddych je nevyhnutný pre regeneráciu.
+Plánované prestávky zvyšujú produktivitu
+a chránia pred vyhorením.
+</p>
+</div>
+
+</div>
+
+<div class="tm-process">
+
+<div class="tm-step">
+<h4>1. Analýza</h4>
+<p>Zmapuj si všetky povinnosti a záväzky.</p>
+</div>
+
+<div class="tm-step">
+<h4>2. Priorita</h4>
+<p>Urči, čo je dôležité a čo môže počkať.</p>
+</div>
+
+<div class="tm-step">
+<h4>3. Realizácia</h4>
+<p>Rozdeľ si úlohy do konkrétnych blokov.</p>
+</div>
+
+<div class="tm-step">
+<h4>4. Regenerácia</h4>
+<p>Nezabúdaj na oddych a psychohygienu.</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- ================= SECTION: PREVENCIA A INTERVENCIE ================= -->
+
+<style>
+
+/* ================= PREVENTION SECTION ================= */
+
+.prevention-section{
+    padding:190px 0;
+    background:linear-gradient(180deg,#0b1220 0%,#111827 100%);
+    color:#f1f5f9;
+    position:relative;
+    overflow:hidden;
+}
+
+.prevention-section::before{
+    content:"";
+    position:absolute;
+    width:900px;
+    height:900px;
+    right:-300px;
+    top:-300px;
+    background:radial-gradient(circle,rgba(139,92,246,.25),transparent 70%);
+    filter:blur(100px);
+}
+
+.prevention-header{
+    max-width:900px;
+    margin-bottom:110px;
+}
+
+.prevention-header h2{
+    font-family:'Playfair Display',serif;
+    font-size:56px;
+    margin-bottom:30px;
+}
+
+.prevention-header p{
+    font-size:18px;
+    color:#cbd5e1;
+    line-height:1.9;
+}
+
+/* INTERVENTION GRID */
+
+.intervention-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:50px;
+}
+
+.intervention-card{
+    background:rgba(255,255,255,.06);
+    backdrop-filter:blur(20px);
+    padding:50px 40px;
+    border-radius:26px;
+    border:1px solid rgba(255,255,255,.08);
+    transition:all .4s ease;
+}
+
+.intervention-card:hover{
+    transform:translateY(-12px);
+    background:rgba(255,255,255,.1);
+}
+
+.intervention-card h3{
+    font-size:24px;
+    margin-bottom:18px;
+    color:#ffffff;
+}
+
+.intervention-card p{
+    font-size:16px;
+    color:#cbd5e1;
+    line-height:1.8;
+}
+
+/* HIGHLIGHT BOX */
+
+.highlight-box{
+    margin-top:140px;
+    padding:70px 80px;
+    background:linear-gradient(135deg,var(--primary),var(--accent));
+    border-radius:35px;
+    text-align:center;
+    box-shadow:0 50px 150px rgba(37,99,235,.5);
+}
+
+.highlight-box h3{
+    font-size:32px;
+    margin-bottom:20px;
+    color:#ffffff;
+}
+
+.highlight-box p{
+    font-size:19px;
+    color:#ffffff;
+    opacity:.95;
+    line-height:1.9;
+}
+
+@media(max-width:900px){
+    .highlight-box{
+        padding:50px 40px;
+    }
+}
+
+</style>
+
+<section class="prevention-section">
+<div class="container">
+
+<div class="prevention-header">
+<h2>Prevencia a odborné intervencie</h2>
+<p>
+Prevencia stresu je dlhodobý proces,
+ktorý si vyžaduje systematický prístup.
+Kombinácia behaviorálnych stratégií,
+psychologickej podpory a biologickej regenerácie
+je najefektívnejšou cestou k udržaniu duševnej stability.
+</p>
+</div>
+
+<div class="intervention-grid">
+
+<div class="intervention-card">
+<h3>Psychologická intervencia</h3>
+<p>
+Kognitívno-behaviorálna terapia pomáha
+identifikovať negatívne myšlienkové vzorce
+a nahradiť ich adaptívnejšími stratégiami zvládania stresu.
+</p>
+</div>
+
+<div class="intervention-card">
+<h3>Mindfulness a meditácia</h3>
+<p>
+Pravidelná prax vedomej pozornosti
+znižuje aktivitu amygdaly,
+stabilizuje emočné reakcie
+a podporuje neuroplasticitu.
+</p>
+</div>
+
+<div class="intervention-card">
+<h3>Sociálna podpora</h3>
+<p>
+Podpora zo strany rodiny,
+priateľov alebo odborníkov
+významne znižuje negatívne
+dôsledky chronického stresu.
+</p>
+</div>
+
+<div class="intervention-card">
+<h3>Školské podporné programy</h3>
+<p>
+Vzdelávacie inštitúcie môžu zavádzať
+workshopy, poradenské služby
+a programy psychohygieny
+na podporu duševného zdravia študentov.
+</p>
+</div>
+
+</div>
+
+<div class="highlight-box">
+<h3>Kľúčový princíp</h3>
+<p>
+Najlepšia intervencia je tá,
+ktorá kombinuje biologickú regeneráciu,
+psychologickú podporu a správny životný štýl.
+Prevencia je investíciou do dlhodobého zdravia.
+</p>
+</div>
+
+</div>
+</section>
+
+
+<!-- ================= SECTION: INTERAKTÍVNY TEST ================= -->
+
+<style>
+
+/* ================= TEST SECTION ================= */
+
+.test-section{
+    padding:200px 0;
+    background:linear-gradient(180deg,#ffffff 0%,#f1f5f9 100%);
+}
+
+.test-header{
+    max-width:900px;
+    margin-bottom:100px;
+}
+
+.test-header h2{
+    font-family:'Playfair Display',serif;
+    font-size:56px;
+    margin-bottom:28px;
+}
+
+.test-header p{
+    font-size:18px;
+    color:var(--gray);
+    line-height:1.85;
+}
+
+/* PROGRESS BAR */
+
+.progress-container{
+    width:100%;
+    height:10px;
+    background:#e2e8f0;
+    border-radius:10px;
+    margin-bottom:60px;
+    overflow:hidden;
+}
+
+.progress-bar{
+    height:100%;
+    width:0%;
+    background:linear-gradient(135deg,var(--primary),var(--secondary));
+    transition:width .3s ease;
+}
+
+/* QUESTIONS */
+
+.question-box{
+    background:#ffffff;
+    padding:40px 35px;
+    border-radius:24px;
+    box-shadow:0 30px 90px rgba(15,23,42,.08);
+    margin-bottom:30px;
+}
+
+.question-box h4{
+    font-size:18px;
+    margin-bottom:20px;
+}
+
+.options{
+    display:flex;
+    flex-wrap:wrap;
+    gap:20px;
+}
+
+.options label{
+    cursor:pointer;
+    font-size:14px;
+}
+
+.test-btn{
+    margin-top:40px;
+    padding:18px 40px;
+    background:linear-gradient(135deg,var(--primary),var(--secondary));
+    color:#ffffff;
+    border:none;
+    border-radius:14px;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    transition:all .3s ease;
+}
+
+.test-btn:hover{
+    transform:translateY(-4px);
+    box-shadow:0 15px 40px rgba(37,99,235,.4);
+}
+
+/* RESULT BOX */
+
+.result-pro{
+    margin-top:60px;
+    padding:50px 40px;
+    border-radius:26px;
+    display:none;
+    font-size:18px;
+    line-height:1.8;
+}
+
+.result-low{
+    background:#dcfce7;
+    color:#166534;
+}
+
+.result-medium{
+    background:#fef9c3;
+    color:#854d0e;
+}
+
+.result-high{
+    background:#fee2e2;
+    color:#7f1d1d;
+}
+
+</style>
+
+<section class="test-section" id="test">
+<div class="container">
+
+<div class="test-header">
+<h2>Test vnímaného stresu</h2>
+<p>
+Odpovedz na nasledujúce otázky podľa toho,
+ako si sa cítil za posledný mesiac.
+Výsledok je orientačný a nenahrádza odbornú diagnostiku.
+</p>
+</div>
+
+<div class="progress-container">
+<div class="progress-bar" id="progressBar"></div>
+</div>
+
+<form id="stressTestPro"></form>
+
+<button class="test-btn" onclick="evaluateProTest()">Vyhodnotiť test</button>
+
+<div id="proResult" class="result-pro"></div>
+
+</div>
+</section>
 
 <script>
-// Scroll header shadow
-window.addEventListener("scroll", () => {
-    const header = document.querySelector("header");
-    if (window.scrollY > 20) {
-        header.style.boxShadow = "0 10px 30px rgba(0,0,0,0.3)";
-    } else {
-        header.style.boxShadow = "none";
+
+/* ================= TEST LOGIC ================= */
+
+const proQuestions = [
+"Ako často ste sa cítili pod tlakom?",
+"Ako často ste mali pocit, že nestíhate?",
+"Ako často ste boli nervózni?",
+"Ako často ste mali problémy so spánkom?",
+"Ako často ste sa cítili vyčerpaní?",
+"Ako často ste mali pocit straty kontroly?",
+"Ako často ste boli podráždení?",
+"Ako často ste mali ťažkosti s koncentráciou?",
+"Ako často ste sa cítili preťažení povinnosťami?",
+"Ako často ste mali pocit beznádeje?"
+];
+
+const form = document.getElementById("stressTestPro");
+const progressBar = document.getElementById("progressBar");
+
+proQuestions.forEach((q,i)=>{
+    form.innerHTML += `
+        <div class="question-box">
+            <h4>${i+1}. ${q}</h4>
+            <div class="options">
+                ${["Nikdy","Zriedka","Niekedy","Často","Veľmi často"].map((t,v)=>`
+                    <label>
+                        <input type="radio" name="q${i}" value="${v}" required>
+                        ${t}
+                    </label>
+                `).join("")}
+            </div>
+        </div>
+    `;
+});
+
+form.addEventListener("change",()=>{
+    const answered = form.querySelectorAll("input:checked").length;
+    progressBar.style.width = (answered/10)*100 + "%";
+});
+
+function evaluateProTest(){
+    let score = 0;
+
+    for(let i=0;i<10;i++){
+        const checked = document.querySelector(`input[name="q${i}"]:checked`);
+        if(!checked){
+            alert("Prosím odpovedz na všetky otázky.");
+            return;
+        }
+        score += parseInt(checked.value);
+    }
+
+    const result = document.getElementById("proResult");
+    result.style.display = "block";
+
+    if(score <= 15){
+        result.className = "result-pro result-low";
+        result.innerHTML = "<strong>Nízka miera stresu.</strong><br>Vaša úroveň stresu je relatívne stabilná.";
+    }
+    else if(score <= 30){
+        result.className = "result-pro result-medium";
+        result.innerHTML = "<strong>Stredná miera stresu.</strong><br>Zvážte zaradenie relaxačných techník.";
+    }
+    else{
+        result.className = "result-pro result-high";
+        result.innerHTML = "<strong>Vysoká miera stresu.</strong><br>Odporúča sa odborná konzultácia a úprava režimu.";
+    }
+}
+
+</script>
+
+
+<!-- ================= SECTION: VEDECKÉ ZDROJE ================= -->
+
+<style>
+
+/* ================= SOURCES SECTION ================= */
+
+.sources-section{
+    padding:200px 0;
+    background:linear-gradient(180deg,#0f172a 0%,#111827 100%);
+    color:#f1f5f9;
+}
+
+.sources-header{
+    max-width:900px;
+    margin-bottom:100px;
+}
+
+.sources-header h2{
+    font-family:'Playfair Display',serif;
+    font-size:56px;
+    margin-bottom:28px;
+}
+
+.sources-header p{
+    font-size:18px;
+    color:#cbd5e1;
+    line-height:1.9;
+}
+
+/* SOURCE GRID */
+
+.sources-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    gap:40px;
+}
+
+.source-card{
+    background:rgba(255,255,255,.05);
+    backdrop-filter:blur(20px);
+    padding:40px 35px;
+    border-radius:24px;
+    border:1px solid rgba(255,255,255,.08);
+    transition:all .35s ease;
+}
+
+.source-card:hover{
+    transform:translateY(-10px);
+    background:rgba(255,255,255,.08);
+}
+
+.source-card h3{
+    font-size:20px;
+    margin-bottom:14px;
+    color:#ffffff;
+}
+
+.source-card p{
+    font-size:14px;
+    color:#cbd5e1;
+    line-height:1.7;
+}
+
+.source-card a{
+    color:#38bdf8;
+    font-weight:500;
+    text-decoration:none;
+}
+
+.source-card a:hover{
+    text-decoration:underline;
+}
+
+/* QUOTE BLOCK */
+
+.research-quote{
+    margin-top:120px;
+    padding:70px 80px;
+    background:linear-gradient(135deg,var(--primary),var(--accent));
+    border-radius:35px;
+    text-align:center;
+    box-shadow:0 50px 150px rgba(37,99,235,.5);
+}
+
+.research-quote h3{
+    font-size:30px;
+    margin-bottom:18px;
+}
+
+.research-quote p{
+    font-size:19px;
+    line-height:1.9;
+    opacity:.95;
+}
+
+@media(max-width:900px){
+    .research-quote{
+        padding:50px 40px;
+    }
+}
+
+</style>
+
+<section class="sources-section">
+<div class="container">
+
+<div class="sources-header">
+<h2>Vedecké zdroje a odborné štúdie</h2>
+<p>
+Nasledujúce zdroje predstavujú vybrané vedecké publikácie,
+ktoré analyzujú biologické, psychologické a behaviorálne
+mechanizmy stresu a jeho dopad na imunitu a duševné zdravie.
+</p>
+</div>
+
+<div class="sources-grid">
+
+<div class="source-card">
+<h3>McEwen, B. S. (2007)</h3>
+<p>
+Physiology and neurobiology of stress and adaptation.
+Central role of the brain.
+<br><br>
+<em>Physiological Reviews</em>
+<br>
+<a href="https://doi.org/10.1152/physrev.00041.2006" target="_blank">
+DOI Link
+</a>
+</p>
+</div>
+
+<div class="source-card">
+<h3>Cohen, S. et al. (2012)</h3>
+<p>
+Chronic stress, glucocorticoid receptor resistance,
+inflammation, and disease risk.
+<br><br>
+<em>Proceedings of the National Academy of Sciences</em>
+<br>
+<a href="https://doi.org/10.1073/pnas.1118355109" target="_blank">
+DOI Link
+</a>
+</p>
+</div>
+
+<div class="source-card">
+<h3>Irwin, M. R. (2015)</h3>
+<p>
+Why sleep is important for health:
+A psychoneuroimmunology perspective.
+<br><br>
+<em>Annual Review of Psychology</em>
+<br>
+<a href="https://doi.org/10.1146/annurev-psych-010213-115205" target="_blank">
+DOI Link
+</a>
+</p>
+</div>
+
+<div class="source-card">
+<h3>WHO (World Health Organization)</h3>
+<p>
+Mental health and stress-related disorders.
+Global health overview and prevention strategies.
+<br><br>
+<a href="https://www.who.int" target="_blank">
+www.who.int
+</a>
+</p>
+</div>
+
+</div>
+
+<div class="research-quote">
+<h3>Vedecký konsenzus</h3>
+<p>
+Chronický stres predstavuje významný rizikový faktor
+pre vznik duševných porúch a oslabenie imunitného systému.
+Prevencia a multidisciplinárny prístup sú nevyhnutné
+pre ochranu zdravia mladých ľudí.
+</p>
+</div>
+
+</div>
+</section>
+
+
+<!-- ================= SECTION: ZÁVER ================= -->
+
+<style>
+
+/* ================= CONCLUSION SECTION ================= */
+
+.conclusion-section{
+    padding:220px 0;
+    background:linear-gradient(180deg,#ffffff 0%,#f8fafc 100%);
+}
+
+.conclusion-header{
+    max-width:950px;
+    margin-bottom:110px;
+}
+
+.conclusion-header h2{
+    font-family:'Playfair Display',serif;
+    font-size:60px;
+    margin-bottom:30px;
+}
+
+.conclusion-header p{
+    font-size:19px;
+    color:var(--gray);
+    line-height:1.95;
+}
+
+/* RECOMMENDATION GRID */
+
+.recommendation-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:45px;
+}
+
+.recommendation-card{
+    background:#ffffff;
+    padding:50px 40px;
+    border-radius:28px;
+    box-shadow:0 35px 110px rgba(15,23,42,.08);
+    transition:all .4s ease;
+    position:relative;
+    overflow:hidden;
+}
+
+.recommendation-card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+        135deg,
+        rgba(37,99,235,.05),
+        transparent
+    );
+}
+
+.recommendation-card:hover{
+    transform:translateY(-12px);
+    box-shadow:0 50px 140px rgba(15,23,42,.15);
+}
+
+.recommendation-card h3{
+    font-size:22px;
+    margin-bottom:18px;
+}
+
+.recommendation-card p{
+    font-size:16px;
+    color:var(--gray);
+    line-height:1.8;
+}
+
+/* FINAL MESSAGE */
+
+.final-message{
+    margin-top:150px;
+    padding:90px 100px;
+    background:linear-gradient(135deg,var(--primary),var(--accent));
+    border-radius:40px;
+    text-align:center;
+    color:#ffffff;
+    box-shadow:0 60px 180px rgba(37,99,235,.5);
+}
+
+.final-message h3{
+    font-size:36px;
+    margin-bottom:24px;
+}
+
+.final-message p{
+    font-size:20px;
+    line-height:2;
+    opacity:.95;
+}
+
+@media(max-width:900px){
+    .final-message{
+        padding:60px 40px;
+    }
+}
+
+</style>
+
+<section class="conclusion-section" id="zaver">
+<div class="container">
+
+<div class="conclusion-header">
+<h2>Záver a praktické odporúčania</h2>
+<p>
+Stres je prirodzenou súčasťou života študentov,
+avšak jeho chronická forma predstavuje
+významné riziko pre duševné aj fyzické zdravie.
+Biologické mechanizmy, ako aktivácia HPA osi,
+zvýšená produkcia kortizolu a narušená imunita,
+spolu s psychologickými faktormi vytvárajú
+komplexnú záťaž, ktorú nemožno ignorovať.
+</p>
+</div>
+
+<div class="recommendation-grid">
+
+<div class="recommendation-card">
+<h3>Pravidelný režim</h3>
+<p>
+Stabilný denný rytmus, dostatok spánku
+a vyvážená strava podporujú hormonálnu rovnováhu
+a znižujú fyziologickú záťaž organizmu.
+</p>
+</div>
+
+<div class="recommendation-card">
+<h3>Vedomé zvládanie stresu</h3>
+<p>
+Mindfulness, dychové techniky
+a relaxačné metódy pomáhajú
+znižovať aktivitu stresovej osi.
+</p>
+</div>
+
+<div class="recommendation-card">
+<h3>Fyzická aktivita</h3>
+<p>
+Pravidelný pohyb znižuje hladinu kortizolu,
+zlepšuje náladu a podporuje
+imunitnú stabilitu.
+</p>
+</div>
+
+<div class="recommendation-card">
+<h3>Vyhľadanie pomoci</h3>
+<p>
+Pri dlhodobých symptómoch úzkosti,
+depresie alebo vyhorenia
+je nevyhnutné vyhľadať odbornú podporu.
+</p>
+</div>
+
+</div>
+
+<div class="final-message">
+<h3>Investícia do zdravia je investíciou do budúcnosti</h3>
+<p>
+Prevencia stresu a systematická starostlivosť
+o duševné zdravie predstavujú
+najefektívnejšiu stratégiu
+na udržanie výkonnosti,
+psychickej stability
+a silného imunitného systému.
+</p>
+</div>
+
+</div>
+</section>
+
+
+
+<!-- ================= SECTION: PODPORA A KONTAKTY ================= -->
+
+<style>
+
+/* ================= CONTACT SECTION ================= */
+
+.contact-section{
+    padding:220px 0;
+    background:linear-gradient(180deg,#0f172a 0%,#020617 100%);
+    color:#f1f5f9;
+    position:relative;
+    overflow:hidden;
+}
+
+.contact-section::before{
+    content:"";
+    position:absolute;
+    width:1000px;
+    height:1000px;
+    left:-400px;
+    top:-300px;
+    background:radial-gradient(circle,rgba(56,189,248,.25),transparent 70%);
+    filter:blur(120px);
+}
+
+.contact-header{
+    max-width:900px;
+    margin-bottom:110px;
+}
+
+.contact-header h2{
+    font-family:'Playfair Display',serif;
+    font-size:56px;
+    margin-bottom:28px;
+}
+
+.contact-header p{
+    font-size:18px;
+    color:#cbd5e1;
+    line-height:1.9;
+}
+
+/* CONTACT GRID */
+
+.contact-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:50px;
+}
+
+.contact-card{
+    background:rgba(255,255,255,.05);
+    backdrop-filter:blur(20px);
+    padding:50px 40px;
+    border-radius:28px;
+    border:1px solid rgba(255,255,255,.08);
+    transition:all .4s ease;
+}
+
+.contact-card:hover{
+    transform:translateY(-12px);
+    background:rgba(255,255,255,.1);
+}
+
+.contact-card h3{
+    font-size:22px;
+    margin-bottom:18px;
+}
+
+.contact-card p,
+.contact-card a{
+    font-size:16px;
+    color:#cbd5e1;
+    line-height:1.8;
+    text-decoration:none;
+}
+
+.contact-card a:hover{
+    color:#38bdf8;
+}
+
+/* ================= FOOTER ================= */
+
+.footer{
+    padding:120px 0 60px;
+    background:#020617;
+    color:#94a3b8;
+}
+
+.footer-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:60px;
+    margin-bottom:60px;
+}
+
+.footer h4{
+    font-size:18px;
+    margin-bottom:20px;
+    color:#ffffff;
+}
+
+.footer p,
+.footer li{
+    font-size:14px;
+    line-height:1.8;
+}
+
+.footer ul{
+    list-style:none;
+    padding:0;
+}
+
+.footer-bottom{
+    border-top:1px solid rgba(255,255,255,.08);
+    padding-top:30px;
+    text-align:center;
+    font-size:13px;
+    color:#64748b;
+}
+
+</style>
+
+<section class="contact-section" id="pomoc">
+<div class="container">
+
+<div class="contact-header">
+<h2>Podpora a odborná pomoc</h2>
+<p>
+Ak stres dlhodobo ovplyvňuje kvalitu života,
+je dôležité vyhľadať odbornú podporu.
+Včasná intervencia výrazne znižuje riziko
+rozvoja závažných psychických ťažkostí.
+</p>
+</div>
+
+<div class="contact-grid">
+
+<div class="contact-card">
+<h3>Psychologické poradenstvo</h3>
+<p>
+Školský psychológ alebo univerzitné poradenské centrum
+môžu poskytnúť odbornú podporu a konzultáciu.
+</p>
+</div>
+
+<div class="contact-card">
+<h3>Linky dôvery</h3>
+<p>
+IPčko – <a href="https://ipcko.sk" target="_blank">ipcko.sk</a><br>
+Linka dôvery Nezábudka<br>
+Bezplatná a anonymná pomoc.
+</p>
+</div>
+
+<div class="contact-card">
+<h3>Medzinárodné zdroje</h3>
+<p>
+WHO – <a href="https://www.who.int" target="_blank">who.int</a><br>
+NIMH – <a href="https://www.nimh.nih.gov" target="_blank">nimh.nih.gov</a>
+</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+<footer class="footer">
+<div class="container">
+
+<div class="footer-grid">
+
+<div>
+<h4>O projekte</h4>
+<p>
+Edukačný projekt zameraný na analýzu
+vplyvu stresu na duševné zdravie
+a imunitu študentov.
+</p>
+</div>
+
+<div>
+<h4>Témy</h4>
+<ul>
+<li>Neurobiológia stresu</li>
+<li>Imunita a regenerácia</li>
+<li>Psychické zdravie</li>
+<li>Prevencia a intervencie</li>
+</ul>
+</div>
+
+<div>
+<h4>Dôležité upozornenie</h4>
+<p>
+Informácie na tejto stránke
+nenahrádzajú odbornú zdravotnú
+ani psychologickú diagnostiku.
+</p>
+</div>
+
+</div>
+
+<div class="footer-bottom">
+© 2026 | Vplyv stresu na duševné zdravie a imunitu študentov | Ultimate Pro Version
+</div>
+
+</div>
+</footer>
+
+<!-- ================= ADVANCED ANIMATIONS & SCROLL EFFECTS ================= -->
+
+<style>
+
+/* ================= GLOBAL SCROLL REVEAL ================= */
+
+.reveal{
+    opacity:0;
+    transform:translateY(60px);
+    transition:all 1s cubic-bezier(.2,.65,.3,1);
+}
+
+.reveal.active{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* FADE LEFT */
+
+.fade-left{
+    opacity:0;
+    transform:translateX(-80px);
+    transition:all 1s ease;
+}
+
+.fade-left.active{
+    opacity:1;
+    transform:translateX(0);
+}
+
+/* FADE RIGHT */
+
+.fade-right{
+    opacity:0;
+    transform:translateX(80px);
+    transition:all 1s ease;
+}
+
+.fade-right.active{
+    opacity:1;
+    transform:translateX(0);
+}
+
+/* ZOOM IN */
+
+.zoom-in{
+    opacity:0;
+    transform:scale(.85);
+    transition:all .9s ease;
+}
+
+.zoom-in.active{
+    opacity:1;
+    transform:scale(1);
+}
+
+/* PARALLAX SECTION */
+
+.parallax-section{
+    position:relative;
+    height:600px;
+    background:linear-gradient(135deg,#1e3a8a,#2563eb);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+}
+
+.parallax-section h2{
+    font-size:60px;
+    color:#ffffff;
+    z-index:2;
+}
+
+.parallax-section::before{
+    content:"";
+    position:absolute;
+    width:140%;
+    height:140%;
+    background:radial-gradient(circle,rgba(255,255,255,.15),transparent 70%);
+    animation:parallaxFloat 12s ease-in-out infinite;
+}
+
+@keyframes parallaxFloat{
+    0%{transform:translateY(0px);}
+    50%{transform:translateY(40px);}
+    100%{transform:translateY(0px);}
+}
+
+/* SMOOTH SECTION DIVIDER */
+
+.section-divider{
+    height:200px;
+    background:linear-gradient(
+        to bottom,
+        transparent,
+        rgba(37,99,235,.1)
+    );
+}
+
+</style>
+
+<!-- PARALLAX VISUAL BREAK -->
+<section class="parallax-section">
+<h2 class="reveal">Odolnosť je schopnosť adaptácie</h2>
+</section>
+
+<div class="section-divider"></div>
+
+<script>
+
+/* ================= INTERSECTION OBSERVER ================= */
+
+const observerPro = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+        if(entry.isIntersecting){
+            entry.target.classList.add("active");
+        }
+    });
+},{
+    threshold:.15
+});
+
+document.querySelectorAll(".reveal, .fade-left, .fade-right, .zoom-in")
+.forEach(el=>{
+    observerPro.observe(el);
+});
+
+/* ================= SMOOTH SCROLL ENHANCEMENT ================= */
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
+    anchor.addEventListener("click",function(e){
+        const target=document.querySelector(this.getAttribute("href"));
+        if(target){
+            e.preventDefault();
+            target.scrollIntoView({
+                behavior:"smooth",
+                block:"start"
+            });
+        }
+    });
+});
+
+/* ================= DYNAMIC NAV HIGHLIGHT ================= */
+
+const sections=document.querySelectorAll("section");
+const navLinks=document.querySelectorAll(".nav-links a");
+
+window.addEventListener("scroll",()=>{
+    let current="";
+    sections.forEach(section=>{
+        const sectionTop=section.offsetTop;
+        if(pageYOffset>=sectionTop-150){
+            current=section.getAttribute("id");
+        }
+    });
+
+    navLinks.forEach(link=>{
+        link.classList.remove("active");
+        if(link.getAttribute("href")==="#"+current){
+            link.classList.add("active");
+        }
+    });
+});
+
+</script>
+
+
+
+<!-- ================= STRESS DASHBOARD VISUAL ================= -->
+
+<style>
+
+/* ================= DASHBOARD SECTION ================= */
+
+.dashboard-section{
+    padding:220px 0;
+    background:linear-gradient(180deg,#f8fafc 0%,#e2e8f0 100%);
+}
+
+.dashboard-header{
+    max-width:900px;
+    margin-bottom:110px;
+}
+
+.dashboard-header h2{
+    font-family:'Playfair Display',serif;
+    font-size:58px;
+    margin-bottom:28px;
+}
+
+.dashboard-header p{
+    font-size:18px;
+    color:var(--gray);
+    line-height:1.9;
+}
+
+/* GLASS WRAPPER */
+
+.dashboard-wrapper{
+    display:grid;
+    grid-template-columns:1.2fr .8fr;
+    gap:60px;
+    align-items:center;
+}
+
+/* LEFT – CHART CARD */
+
+.glass-dashboard{
+    background:rgba(255,255,255,.6);
+    backdrop-filter:blur(25px);
+    padding:60px 50px;
+    border-radius:35px;
+    box-shadow:0 40px 120px rgba(15,23,42,.1);
+    position:relative;
+    overflow:hidden;
+}
+
+.glass-dashboard::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+        135deg,
+        rgba(37,99,235,.08),
+        transparent
+    );
+}
+
+.metric{
+    margin-bottom:45px;
+}
+
+.metric h4{
+    font-size:18px;
+    margin-bottom:12px;
+}
+
+.metric-bar{
+    width:100%;
+    height:14px;
+    background:#e2e8f0;
+    border-radius:10px;
+    overflow:hidden;
+}
+
+.metric-fill{
+    height:100%;
+    width:0%;
+    border-radius:10px;
+    transition:width 1.2s ease;
+}
+
+.fill-stress{
+    background:linear-gradient(135deg,#ef4444,#f97316);
+}
+
+.fill-sleep{
+    background:linear-gradient(135deg,#3b82f6,#06b6d4);
+}
+
+.fill-focus{
+    background:linear-gradient(135deg,#10b981,#22c55e);
+}
+
+/* RIGHT – INFO PANEL */
+
+.dashboard-info{
+    padding:40px 30px;
+}
+
+.dashboard-info h3{
+    font-size:28px;
+    margin-bottom:20px;
+}
+
+.dashboard-info p{
+    font-size:16px;
+    color:var(--gray);
+    line-height:1.85;
+    margin-bottom:18px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+    .dashboard-wrapper{
+        grid-template-columns:1fr;
+        gap:60px;
+    }
+}
+
+</style>
+
+<section class="dashboard-section">
+<div class="container">
+
+<div class="dashboard-header">
+<h2>Vizualizácia stresovej záťaže</h2>
+<p>
+Modelová vizualizácia ukazuje,
+ako sa môže meniť úroveň stresu,
+kvalita spánku a schopnosť koncentrácie
+v závislosti od životného štýlu študenta.
+</p>
+</div>
+
+<div class="dashboard-wrapper">
+
+<div class="glass-dashboard zoom-in">
+
+<div class="metric">
+<h4>Úroveň stresu</h4>
+<div class="metric-bar">
+<div class="metric-fill fill-stress" id="stressFill"></div>
+</div>
+</div>
+
+<div class="metric">
+<h4>Kvalita spánku</h4>
+<div class="metric-bar">
+<div class="metric-fill fill-sleep" id="sleepFill"></div>
+</div>
+</div>
+
+<div class="metric">
+<h4>Koncentrácia</h4>
+<div class="metric-bar">
+<div class="metric-fill fill-focus" id="focusFill"></div>
+</div>
+</div>
+
+</div>
+
+<div class="dashboard-info fade-right">
+<h3>Dynamika stresu</h3>
+<p>
+Chronický stres zvyšuje hladinu kortizolu,
+čo negatívne ovplyvňuje kvalitu spánku
+a schopnosť sústredenia.
+</p>
+<p>
+Zlepšenie režimu, pohybu a psychohygieny
+môže výrazne stabilizovať tieto parametre
+a obnoviť fyziologickú rovnováhu.
+</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+<script>
+
+/* ================= DASHBOARD ANIMATION ================= */
+
+function animateDashboard(){
+    document.getElementById("stressFill").style.width="75%";
+    document.getElementById("sleepFill").style.width="45%";
+    document.getElementById("focusFill").style.width="60%";
+}
+
+const dashObserver=new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+        if(entry.isIntersecting){
+            animateDashboard();
+        }
+    });
+},{threshold:.4});
+
+dashObserver.observe(document.querySelector(".glass-dashboard"));
+
+</script>
+
+
+
+<!-- ================= CASE STUDY SECTION ================= -->
+
+<style>
+
+/* ================= CASE STUDY ================= */
+
+.case-section{
+    padding:220px 0;
+    background:linear-gradient(180deg,#ffffff 0%,#f1f5f9 100%);
+}
+
+.case-header{
+    max-width:900px;
+    margin-bottom:100px;
+}
+
+.case-header h2{
+    font-family:'Playfair Display',serif;
+    font-size:56px;
+    margin-bottom:28px;
+}
+
+.case-header p{
+    font-size:18px;
+    color:var(--gray);
+    line-height:1.9;
+}
+
+/* LAYOUT */
+
+.case-wrapper{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:70px;
+    align-items:center;
+}
+
+/* PROFILE CARD */
+
+.student-card{
+    background:#ffffff;
+    padding:60px 50px;
+    border-radius:30px;
+    box-shadow:0 40px 120px rgba(15,23,42,.08);
+    position:relative;
+}
+
+.student-card h3{
+    font-size:26px;
+    margin-bottom:20px;
+}
+
+.student-card ul{
+    list-style:none;
+    padding:0;
+}
+
+.student-card li{
+    margin-bottom:14px;
+    font-size:16px;
+    color:var(--gray);
+}
+
+/* ANALYSIS CARD */
+
+.analysis-card{
+    background:linear-gradient(135deg,var(--primary),var(--accent));
+    padding:70px 60px;
+    border-radius:35px;
+    color:#ffffff;
+    box-shadow:0 50px 150px rgba(37,99,235,.4);
+}
+
+.analysis-card h3{
+    font-size:30px;
+    margin-bottom:24px;
+}
+
+.analysis-card p{
+    font-size:18px;
+    line-height:1.9;
+    opacity:.95;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+    .case-wrapper{
+        grid-template-columns:1fr;
+        gap:60px;
+    }
+}
+
+</style>
+
+<section class="case-section">
+<div class="container">
+
+<div class="case-header">
+<h2>Modelová prípadová štúdia</h2>
+<p>
+Nasledujúci model predstavuje typickú situáciu
+študenta vystaveného dlhodobému akademickému tlaku,
+nedostatku spánku a chronickému stresu.
+</p>
+</div>
+
+<div class="case-wrapper">
+
+<div class="student-card fade-left">
+<h3>Profil študenta</h3>
+<ul>
+<li>• 21 rokov, vysokoškolský študent</li>
+<li>• Spánok: 5–6 hodín denne</li>
+<li>• Vysoká akademická záťaž</li>
+<li>• Nedostatok pravidelného pohybu</li>
+<li>• Časté pocity únavy a podráždenosti</li>
+</ul>
+</div>
+
+<div class="analysis-card fade-right">
+<h3>Analýza situácie</h3>
+<p>
+Dlhodobý deficit spánku vedie k zvýšenej aktivácii HPA osi,
+zvýšenej hladine kortizolu a oslabenej imunitnej odpovedi.
+Zároveň dochádza k zníženiu koncentrácie,
+emočnej stability a zvýšeniu rizika úzkostných stavov.
+</p>
+<p>
+Implementácia režimových opatrení,
+mindfulness techník a pravidelného pohybu
+by mohla výrazne znížiť fyziologickú aj psychickú záťaž.
+</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+
+<!-- ================= STRESS DEVELOPMENT TIMELINE ================= -->
+
+<style>
+
+/* ================= TIMELINE SECTION ================= */
+
+.timeline-section{
+    padding:220px 0;
+    background:linear-gradient(180deg,#0f172a 0%,#111827 100%);
+    color:#f1f5f9;
+}
+
+.timeline-header{
+    max-width:900px;
+    margin-bottom:110px;
+}
+
+.timeline-header h2{
+    font-family:'Playfair Display',serif;
+    font-size:56px;
+    margin-bottom:28px;
+}
+
+.timeline-header p{
+    font-size:18px;
+    color:#cbd5e1;
+    line-height:1.9;
+}
+
+/* TIMELINE WRAPPER */
+
+.timeline-wrapper{
+    position:relative;
+    margin-top:80px;
+    padding-left:60px;
+    border-left:4px solid var(--primary);
+}
+
+.timeline-item-pro{
+    position:relative;
+    margin-bottom:80px;
+}
+
+.timeline-dot-pro{
+    position:absolute;
+    left:-15px;
+    top:5px;
+    width:22px;
+    height:22px;
+    background:var(--accent);
+    border-radius:50%;
+    box-shadow:0 0 0 6px rgba(56,189,248,.25);
+}
+
+.timeline-item-pro h3{
+    font-size:22px;
+    margin-bottom:12px;
+}
+
+.timeline-item-pro p{
+    font-size:16px;
+    color:#cbd5e1;
+    line-height:1.8;
+}
+
+/* VISUAL GRAPH */
+
+.graph-container{
+    margin-top:120px;
+    background:rgba(255,255,255,.05);
+    backdrop-filter:blur(20px);
+    padding:60px 50px;
+    border-radius:30px;
+    border:1px solid rgba(255,255,255,.08);
+}
+
+.graph-bar{
+    height:18px;
+    background:#1e293b;
+    border-radius:10px;
+    margin-bottom:35px;
+    overflow:hidden;
+}
+
+.graph-fill{
+    height:100%;
+    width:0%;
+    background:linear-gradient(135deg,#ef4444,#f97316);
+    transition:width 1.5s ease;
+    border-radius:10px;
+}
+
+.graph-label{
+    margin-bottom:8px;
+    font-size:15px;
+}
+
+@media(max-width:900px){
+    .timeline-wrapper{
+        padding-left:40px;
+    }
+}
+
+</style>
+
+<section class="timeline-section">
+<div class="container">
+
+<div class="timeline-header">
+<h2>Dlhodobý vývoj stresu</h2>
+<p>
+Ak sa stres nerieši systematicky,
+môže sa postupne transformovať
+z akútnej reakcie na chronický stav,
+ktorý významne ovplyvňuje fyziológiu aj psychiku.
+</p>
+</div>
+
+<div class="timeline-wrapper">
+
+<div class="timeline-item-pro reveal">
+<div class="timeline-dot-pro"></div>
+<h3>Fáza 1 – Akútny stres</h3>
+<p>
+Krátkodobá aktivácia sympatického nervového systému,
+zvýšenie adrenalínu a mobilizácia energie.
+</p>
+</div>
+
+<div class="timeline-item-pro reveal">
+<div class="timeline-dot-pro"></div>
+<h3>Fáza 2 – Adaptácia</h3>
+<p>
+Organizmus sa snaží prispôsobiť záťaži,
+no dochádza k zvýšenej produkcii kortizolu.
+</p>
+</div>
+
+<div class="timeline-item-pro reveal">
+<div class="timeline-dot-pro"></div>
+<h3>Fáza 3 – Vyčerpanie</h3>
+<p>
+Dlhodobá aktivácia HPA osi vedie
+k oslabeniu imunity, únave a psychickému vyčerpaniu.
+</p>
+</div>
+
+</div>
+
+<div class="graph-container zoom-in">
+<div class="graph-label">Rok 1 – Začiatok štúdia</div>
+<div class="graph-bar">
+<div class="graph-fill" id="bar1"></div>
+</div>
+
+<div class="graph-label">Rok 2 – Zvýšená záťaž</div>
+<div class="graph-bar">
+<div class="graph-fill" id="bar2"></div>
+</div>
+
+<div class="graph-label">Rok 3 – Chronický stres</div>
+<div class="graph-bar">
+<div class="graph-fill" id="bar3"></div>
+</div>
+</div>
+
+</div>
+</section>
+
+<script>
+
+/* ================= GRAPH ANIMATION ================= */
+
+function animateGraph(){
+    document.getElementById("bar1").style.width="35%";
+    document.getElementById("bar2").style.width="65%";
+    document.getElementById("bar3").style.width="85%";
+}
+
+const graphObserver=new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+        if(entry.isIntersecting){
+            animateGraph();
+        }
+    });
+},{threshold:.4});
+
+graphObserver.observe(document.querySelector(".graph-container"));
+
+</script>
+
+
+
+
+<!-- ================= FUTURE OUTLOOK SECTION ================= -->
+
+<style>
+
+/* ================= FUTURE SECTION ================= */
+
+.future-section{
+    padding:240px 0;
+    background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);
+    color:#f8fafc;
+    position:relative;
+    overflow:hidden;
+}
+
+.future-section::before{
+    content:"";
+    position:absolute;
+    width:1200px;
+    height:1200px;
+    right:-400px;
+    top:-400px;
+    background:radial-gradient(circle,rgba(59,130,246,.25),transparent 70%);
+    filter:blur(140px);
+}
+
+.future-header{
+    max-width:950px;
+    margin-bottom:120px;
+}
+
+.future-header h2{
+    font-family:'Playfair Display',serif;
+    font-size:60px;
+    margin-bottom:30px;
+}
+
+.future-header p{
+    font-size:19px;
+    line-height:1.95;
+    color:#cbd5e1;
+}
+
+/* VISION GRID */
+
+.vision-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:60px;
+}
+
+.vision-card{
+    background:rgba(255,255,255,.05);
+    backdrop-filter:blur(25px);
+    padding:60px 50px;
+    border-radius:35px;
+    border:1px solid rgba(255,255,255,.08);
+    transition:all .45s ease;
+}
+
+.vision-card:hover{
+    transform:translateY(-15px);
+    background:rgba(255,255,255,.08);
+}
+
+.vision-card h3{
+    font-size:24px;
+    margin-bottom:20px;
+}
+
+.vision-card p{
+    font-size:17px;
+    line-height:1.9;
+    color:#cbd5e1;
+}
+
+/* BIG STATEMENT */
+
+.future-statement{
+    margin-top:160px;
+    padding:100px 110px;
+    background:linear-gradient(135deg,var(--primary),#7c3aed);
+    border-radius:50px;
+    text-align:center;
+    box-shadow:0 70px 200px rgba(37,99,235,.6);
+}
+
+.future-statement h3{
+    font-size:40px;
+    margin-bottom:28px;
+}
+
+.future-statement p{
+    font-size:22px;
+    line-height:2;
+    opacity:.95;
+}
+
+@media(max-width:900px){
+    .future-statement{
+        padding:70px 40px;
+    }
+}
+
+</style>
+
+<section class="future-section">
+<div class="container">
+
+<div class="future-header">
+<h2>Budúcnosť zdravého štúdia</h2>
+<p>
+Moderné vzdelávacie prostredie sa musí adaptovať
+na rastúce nároky digitálnej doby.
+Prevencia stresu by nemala byť doplnkom,
+ale integrálnou súčasťou akademickej kultúry.
+</p>
+</div>
+
+<div class="vision-grid">
+
+<div class="vision-card reveal">
+<h3>Digitálne nástroje</h3>
+<p>
+Implementácia aplikácií monitorujúcich stres,
+spánok a koncentráciu môže pomôcť
+študentom lepšie regulovať vlastnú záťaž.
+</p>
+</div>
+
+<div class="vision-card reveal">
+<h3>Well-being programy</h3>
+<p>
+Vzdelávacie inštitúcie môžu vytvárať
+programy psychohygieny,
+mindfulness workshopov
+a podpory duševného zdravia.
+</p>
+</div>
+
+<div class="vision-card reveal">
+<h3>Personalizovaná prevencia</h3>
+<p>
+Využitie dátovej analytiky umožní
+individuálne odporúčania
+zohľadňujúce biologické
+a psychologické faktory študenta.
+</p>
+</div>
+
+</div>
+
+<div class="future-statement zoom-in">
+<h3>Transformácia vzdelávania</h3>
+<p>
+Budúcnosť akademického prostredia
+spočíva v rovnováhe medzi výkonom
+a duševným zdravím.
+Odolnosť, adaptácia a prevencia
+sú základom dlhodobej udržateľnosti.
+</p>
+</div>
+
+</div>
+</section>
+
+
+<!-- ================= PRODUCTION OPTIMIZATION & FINAL POLISH ================= -->
+
+<style>
+
+/* ================= PERFORMANCE OPTIMIZATION ================= */
+
+/* GPU acceleration for animations */
+.reveal,
+.fade-left,
+.fade-right,
+.zoom-in,
+.metric-fill,
+.graph-fill{
+    will-change:transform, opacity, width;
+}
+
+/* Improve text rendering */
+body{
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    text-rendering:optimizeLegibility;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar{
+    width:10px;
+}
+
+::-webkit-scrollbar-track{
+    background:#0f172a;
+}
+
+::-webkit-scrollbar-thumb{
+    background:linear-gradient(135deg,#2563eb,#38bdf8);
+    border-radius:10px;
+}
+
+/* Selection color */
+::selection{
+    background:#2563eb;
+    color:#ffffff;
+}
+
+/* Smooth image rendering */
+img{
+    max-width:100%;
+    height:auto;
+    display:block;
+}
+
+</style>
+
+<script>
+
+/* ================= LAZY LOAD IMAGES ================= */
+
+document.addEventListener("DOMContentLoaded",function(){
+    const lazyImages=document.querySelectorAll("img");
+
+    const imgObserver=new IntersectionObserver((entries,observer)=>{
+        entries.forEach(entry=>{
+            if(entry.isIntersecting){
+                const img=entry.target;
+                if(img.dataset.src){
+                    img.src=img.dataset.src;
+                }
+                observer.unobserve(img);
+            }
+        });
+    });
+
+    lazyImages.forEach(img=>{
+        if(img.dataset.src){
+            imgObserver.observe(img);
+        }
+    });
+});
+
+/* ================= PERFORMANCE MONITOR (DEV MODE READY) ================= */
+
+window.addEventListener("load",()=>{
+    if(performance && performance.timing){
+        const loadTime=performance.timing.loadEventEnd - performance.timing.navigationStart;
+        console.log("Page load time:",loadTime,"ms");
     }
 });
+
+/* ================= GLOBAL ERROR HANDLING ================= */
+
+window.addEventListener("error",function(e){
+    console.warn("Runtime error detected:",e.message);
+});
+
+/* ================= FINAL INITIALIZATION ================= */
+
+console.log("Ultimate Stress & Mental Health Platform – Production Ready");
+
 </script>
+
+<!-- ================= END OF DOCUMENT ================= -->
 
 </body>
 </html>
